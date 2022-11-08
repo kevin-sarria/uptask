@@ -43,8 +43,8 @@ class LoginController {
 
         }
 
-        $router->render( '', [
-
+        $router->render( 'auth/olvide', [
+            'titulo' => 'Olvide mi Contraseña'
         ]);
 
     }
@@ -56,8 +56,8 @@ class LoginController {
 
         }
 
-        $router->render( '', [
-
+        $router->render( 'auth/reestablecer', [
+            'titulo' => 'Reestablecer'
         ]);
 
     }
@@ -67,8 +67,8 @@ class LoginController {
         
         
 
-        $router->render( '', [
-
+        $router->render( 'auth/mensaje', [
+            'titulo' => 'Cuenta Creada Exitosamente'
         ]);
 
     }
@@ -78,8 +78,8 @@ class LoginController {
         
         
 
-        $router->render( '', [
-
+        $router->render( 'auth/confirmar', [
+            'titulo' => 'Confirma Tu Cuenta de UpTask'
         ]);
 
     }
