@@ -5,7 +5,11 @@
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Coloca tu nueva contraseña</p>
 
-        <form class="formulario" method="POST" action="/reestablecer">
+        <?php include_once __DIR__ . '/../templates/alertas.php'; ?>
+
+        <?php if($mostrar): ?>
+
+        <form class="formulario" method="POST">
 
             <div class="campo">
                 <label for="password">Contraseña</label>
@@ -20,6 +24,7 @@
             <input type="submit" value="Reestablecer Contraseña" class="boton">
 
         </form>
+    <?php endif; ?>
 
         <div class="acciones">
             <a href="/crear">¿Aún no tienes una cuenta? Crea Una</a>
