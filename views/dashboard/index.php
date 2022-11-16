@@ -1,13 +1,28 @@
+<?php include_once __DIR__ . '/header-dashboard.php' ?>
 
-<div class="dashboard">
+    <?php if(count($proyectos) === 0): ?>
 
-    <?php include_once __DIR__ . '/../templates/sidebar.php'; ?>
+        <p class="no-proyectos">No Hay Proyectos Aún <a href="/crear-proyecto">Comienza Creando Uno</a></p>
 
-    <div class="principal">
+    <?php else: ?>
 
-        <?php include_once __DIR__ . '/../templates/barra.php' ?>
+        <ul class="listado-proyectos">
 
-    </div>
+            <?php foreach($proyectos as $proyecto): ?>
 
-</div>
+                <li class="proyecto">
 
+                    <a href="/proyecto?url=<?php echo $proyecto->url; ?>">
+                        <?php echo $proyecto->proyecto; ?>
+                    </a>
+
+                </li>
+                
+            <?php endforeach; ?>
+
+        </ul>
+
+    <?php endif; ?>
+
+
+<?php include_once __DIR__ . '/footer-dashboard.php' ?>
