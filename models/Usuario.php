@@ -14,6 +14,8 @@ class Usuario extends ActiveRecord {
         $this->nombre = $args['nombre'] ?? '';
         $this->email = $args['email'] ?? '';
         $this->password = $args['password'] ?? '';
+        $this->password_actual = $args['password_actual'] ?? '';
+        $this->password_nuevo = $args['password_nuevo'] ?? '';
         $this->password2 = $args['password2'] ?? null;
         $this->token = $args['token'] ?? '';
         $this->confirmado = $args['confirmado'] ?? 0;
@@ -75,13 +77,36 @@ class Usuario extends ActiveRecord {
         return self::$alertas;
     }
 
+    public function nuevoPassword() : array {
+
+        if( !$this->password_actual ) {
+            self::$alertas['error'][] = 'La Contraseña Actual es Obligatoria';
+        }
+
+        if( !$this->password_nuevo ) {
+            self::$alertas['error'][] = 'La Nueva Contraseña es Obligatoria';
+        }else if( strlen($this->password_nuevo) < 8 ) {
+            self::$alertas['error'][] = 'La Contraseña Nueva debe tener al menos 8 caracteres';
+        }
+
+        return self::$alertas;
+
+    }
+
+    // Comprobar el Password
+    public function comprobar_password() : bool {
+
+        return password_verify( $this->password_actual, $this->password );
+
+    }
+
     // Hashea el password
-    public function hashearPassword() {
+    public function hashearPassword() : void {
         $this->password = password_hash($this->password, PASSWORD_BCRYPT);
     }
 
     // Crea un nuevo token
-    public function crearToken() {
+    public function crearToken() : void {
         $this->token = uniqid();
     }
 
@@ -96,6 +121,22 @@ class Usuario extends ActiveRecord {
         return self::$alertas;
 
     }
+
+    public function validar_perfil() {
+    
+        if( !$this->nombre ) {
+            self::$alertas['error'][] = 'El Nombre es Obligatorio';
+        }
+
+        if( !$this->email ) {
+            self::$alertas['error'][] = 'El Correo es Obligatorio';
+        }
+
+        return self::$alertas;
+
+    }
+
+
 
 
 }

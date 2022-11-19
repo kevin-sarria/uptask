@@ -3,14 +3,69 @@
 
 
 .sidebar {
-
+    opacity: 0;
     background-color: v.$indigo;
-    padding: 2rem;
+    height: 0;
+    transition-property: opacity;
+    transition-duration: 500ms;
+    overflow: hidden;
 
-    h2 {
-        color: v.$blanco;
-        margin: 0;
-        text-align: center;
+    &.mostrar {
+        opacity: 1;
+        padding: 2rem;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgb( 0 0 0 / 0.90 );
+        @include m.tablet {
+            display: none;
+        }
+    }
+
+    &.ocultar {
+        opacity: 0;
+    }
+
+    @include m.tablet {
+        height: 100%;
+        opacity: 1;
+        padding: 2rem;
+        background-color: v.$indigo;
+    }
+
+    .contenedor-sidebar {
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h2 {
+            color: v.$blanco;
+            margin: 0;
+            text-align: center;
+        }
+
+        .cerrar-menu {
+            display: flex;
+            justify-content: center;
+            height: 3rem;
+            width: 3rem;
+
+            img {
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            @include m.tablet {
+                display: none;
+            }
+
+        }
+
     }
 
     .sidebar-nav {
@@ -24,7 +79,9 @@
             transition-property: background-color;
             transition-duration: 300ms;
             text-transform: uppercase;
-            font-size: 1.5rem;
+            font-size: 2.4rem;
+            margin-bottom: 2rem;
+            text-align: center;
 
             &:hover,
             &.activo {
@@ -32,6 +89,24 @@
                 border-radius: 0.5rem;
             }
 
+            @include m.tablet {
+                font-size: 1.5rem;
+                text-align: left;
+            }
+
+        }
+
+    }
+
+    .cerrar-sesion-mobile {
+        margin-top: 10rem;
+
+        .cerrar-sesion {
+            @include m.boton(v.$indigo, v.$blanco);
+        }
+
+        @include m.tablet {
+            display: none;
         }
 
     }
